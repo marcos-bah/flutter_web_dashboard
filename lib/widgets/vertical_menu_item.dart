@@ -13,7 +13,9 @@ class VerticalMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap,
+      onTap: () {
+        onTap!();
+      },
       onHover: (value) {
         value
             ? menuController.onHover(itemName)
