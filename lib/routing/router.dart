@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/pages/authentication/authentication.dart';
 import 'package:flutter_web_dashboard/pages/clients/clients.dart';
 import 'package:flutter_web_dashboard/pages/drivers/drivers.dart';
 import 'package:flutter_web_dashboard/pages/overview/overview.dart';
@@ -17,7 +16,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(ClientsPage());
 
     default:
-      return _getPageRoute(AuthenticationPage());
+      return _getPageRoute(OverViewPage());
   }
 }
 
