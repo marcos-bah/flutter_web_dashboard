@@ -6,7 +6,7 @@ import 'package:flutter_web_dashboard/widgets/small_screen.dart';
 import 'package:flutter_web_dashboard/widgets/top_nav.dart';
 
 class SiteLayout extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,9 @@ class SiteLayout extends StatelessWidget {
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       appBar: topNavigationBar(context, _scaffoldKey),
-      drawer: Drawer(child: SideMenu()),
+      drawer: Drawer(
+        child: SideMenu(),
+      ),
       body: ResponsiveWidget(
         largeScreen: LargeScreen(),
         smallScreen: SmallScreen(),

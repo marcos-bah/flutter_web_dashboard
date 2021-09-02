@@ -30,6 +30,7 @@ AppBar topNavigationBar(
       title: Row(
         children: [
           Visibility(
+            visible: !ResponsiveWidget.isSmallScreen(context),
             child: CustomText(text: "Dash", color: lightGrey, size: 20),
           ),
           Expanded(

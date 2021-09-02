@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_dashboard/constants/controllers.dart';
 import 'package:flutter_web_dashboard/constants/style.dart';
 import 'package:flutter_web_dashboard/controllers/menu_controller.dart';
 import 'package:flutter_web_dashboard/controllers/navigation_controller.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_web_dashboard/pages/authentication/authentication.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:flutter_web_dashboard/routing/routes.dart';
+import 'routing/routes.dart';
 
 void main() {
   Get.put(MenuController());
@@ -18,34 +17,24 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute: authenticationPageRoute,
 
       unknownRoute: GetPage(
-        name: "/not-found",
-        page: () => PageNotFound(),
-        transition: Transition.fadeIn,
-      ),
+          name: '/not-found',
+          page: () => PageNotFound(),
+          transition: Transition.fadeIn),
       getPages: [
         GetPage(
-          name: authenticationPageRoute,
-          page: () => AuthenticationPage(),
-        ),
+            name: rootRoute,
+            page: () {
+              return SiteLayout();
+            }),
         GetPage(
-          name: rootRoute,
-          unknownRoute: GetPage(
-            name: "/not-found",
-            page: () => PageNotFound(),
-            transition: Transition.fadeIn,
-          ),
-          page: () {
-            return SiteLayout();
-          },
-        ),
+            name: authenticationPageRoute, page: () => AuthenticationPage()),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Dashboard',
