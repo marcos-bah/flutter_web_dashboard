@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/constants/style.dart';
+import 'package:flutter_web_dashboard/pages/authentication/controllers/auth_controller.dart';
+import 'package:flutter_web_dashboard/pages/authentication/widgets/form_credential.dart';
 import 'package:flutter_web_dashboard/routing/routes.dart';
 import 'package:flutter_web_dashboard/widgets/custom_text.dart';
 import 'package:get/get.dart';
@@ -10,10 +12,19 @@ class AuthenticationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.put(AuthController());
+    print("build");
     return Scaffold(
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 300),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: lightGrey,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          constraints: BoxConstraints(maxWidth: 300, maxHeight: 500),
           padding: EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -42,31 +53,33 @@ class AuthenticationPage extends StatelessWidget {
               Row(
                 children: [
                   CustomText(
-                    text: "Welcome back!",
+                    text: "Bem vindo de volta!",
                     color: lightGrey,
                   ),
                 ],
               ),
               SizedBox(height: 15),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  labelText: "Email",
-                  hintText: "abc@domain.com",
-                ),
+              FormCredentialInput(
+                label: "E-mail",
+                hint: "abc@domain.com",
               ),
               SizedBox(height: 15),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+              Obx(
+                () => FormCredentialInput(
+                  label: "Password",
+                  hint: "*******",
+                  obscure: !authController.isVisiblePass,
+                  suffix: IconButton(
+                    padding: EdgeInsets.only(right: 10),
+                    icon: Icon(
+                      !authController.isVisiblePass
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: lightGrey,
+                    ),
+                    onPressed: authController.changedVisiblePass,
                   ),
-                  labelText: "Password",
-                  hintText: "********",
                 ),
-                obscureText: true,
               ),
               SizedBox(height: 15),
               Row(
@@ -79,13 +92,13 @@ class AuthenticationPage extends StatelessWidget {
                         onChanged: (value) {},
                       ),
                       CustomText(
-                        text: "Remember me",
+                        text: "Lembrar",
                         size: 14,
                       ),
                     ],
                   ),
                   CustomText(
-                    text: "Forgot password?",
+                    text: "Esqueceu a senha?",
                     color: active,
                     size: 14,
                   ),
@@ -115,7 +128,7 @@ class AuthenticationPage extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Don't have an account? ",
+                      text: "Não possui uma conta? ",
                     ),
                     TextSpan(
                       text: "Sign up",
