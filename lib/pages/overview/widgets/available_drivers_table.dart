@@ -101,7 +101,7 @@ class AvailableDriversTable extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       child: CustomText(
-                        text: "Confirmar Entrega",
+                        text: "Confirmar",
                         color: active.withOpacity(.7),
                         weight: FontWeight.bold,
                       ),
