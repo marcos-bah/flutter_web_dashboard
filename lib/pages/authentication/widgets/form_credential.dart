@@ -6,6 +6,7 @@ class FormCredentialInput extends StatelessWidget {
   final bool obscure;
   final Iterable<String>? fill;
   final Widget? suffix;
+  final String? Function(String?)? validator;
   const FormCredentialInput({
     Key? key,
     required this.label,
@@ -13,13 +14,16 @@ class FormCredentialInput extends StatelessWidget {
     this.obscure = false,
     this.suffix,
     this.fill,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       obscureText: obscure,
       autofillHints: fill,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
